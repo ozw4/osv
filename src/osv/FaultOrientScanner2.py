@@ -348,11 +348,9 @@ class FaultOrientScanner2:
                 cp = ck * ct - sk * st
                 x1 = rk * cp + r1
                 x2 = rk * sp + r2
-
                 fu[i2][i1] = self._si.interpolate(
                     m1, 1.0, 0.0, m2, 1.0, 0.0, fr, x1, x2
                 )
-
 
         asyncio.run(asyncio.gather(*(process(i2) for i2 in range(n2))))
         return fu
