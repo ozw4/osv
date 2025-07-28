@@ -10,6 +10,7 @@ from typing import List, Sequence
 # Vector helpers
 # -----------------------------------------------------------------------------
 
+
 def fault_dip_vector_from_strike_and_dip(phi: float, theta: float) -> List[float]:
     """Return fault dip vector for specified strike and dip angles."""
     p = radians(phi)

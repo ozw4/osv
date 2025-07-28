@@ -9,7 +9,10 @@ from .Vec import Vec
 class VecArrayFloat2(Vec):
     """Vector represented by a 2-D ``float`` array."""
 
-    def __init__(self, arg1: int | Sequence[Sequence[float]], n2: int | None = None) -> None:
+    def __init__(
+        self, arg1: int | Sequence[Sequence[float]], n2: int | None = None
+    ) -> None:
+
         if isinstance(arg1, int):
             if n2 is None:
                 raise ValueError("n2 must be provided when arg1 is int")

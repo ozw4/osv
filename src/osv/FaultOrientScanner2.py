@@ -113,9 +113,9 @@ class FaultOrientScanner2:
                 fc[i2][i1] = fpi
         return fc
 
-    async def thin(
-        self, fet: Sequence[List[List[float]]]
-    ) -> List[List[List[float]]]:
+
+    async def thin(self, fet: Sequence[List[List[float]]]) -> List[List[List[float]]]:
+
         n2 = len(fet[0])
         n1 = len(fet[0][0])
         f = fet[0]
@@ -143,7 +143,11 @@ class FaultOrientScanner2:
         await asyncio.gather(*(process(i2) for i2 in range(n2)))
         return [ff, tt]
 
-    def edge_like_fit2(self, r: int, fl: Sequence[Sequence[float]]) -> List[List[float]]:
+
+    def edge_like_fit2(
+        self, r: int, fl: Sequence[Sequence[float]]
+    ) -> List[List[float]]:
+
         n2 = len(fl)
         n1 = len(fl[0])
         flr = [[0.0] * n1 for _ in range(n2)]
@@ -301,7 +305,11 @@ class FaultOrientScanner2:
                 cp = ck * ct + sk * st
                 x1 = rk * cp + h1
                 x2 = rk * sp + h2
-                fr[i2][i1] = self._si.interpolate(n1, 1.0, 0.0, n2, 1.0, 0.0, fx, x1, x2)
+
+                fr[i2][i1] = self._si.interpolate(
+                    n1, 1.0, 0.0, n2, 1.0, 0.0, fx, x1, x2
+                )
+
 
         asyncio.run(asyncio.gather(*(process(i2) for i2 in range(m2))))
         return fr
@@ -340,7 +348,11 @@ class FaultOrientScanner2:
                 cp = ck * ct - sk * st
                 x1 = rk * cp + r1
                 x2 = rk * sp + r2
-                fu[i2][i1] = self._si.interpolate(m1, 1.0, 0.0, m2, 1.0, 0.0, fr, x1, x2)
+
+                fu[i2][i1] = self._si.interpolate(
+                    m1, 1.0, 0.0, m2, 1.0, 0.0, fr, x1, x2
+                )
+
 
         asyncio.run(asyncio.gather(*(process(i2) for i2 in range(n2))))
         return fu

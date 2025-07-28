@@ -165,7 +165,11 @@ class CgSolver:
     # Helpers
     # ------------------------------------------------------------------
     def _user_stop(
-        self, stopper: Optional["CgSolver.Stopper"], iter_count: int, bnorm: float, rnorm: float
+        self,
+        stopper: Optional["CgSolver.Stopper"],
+        iter_count: int,
+        bnorm: float,
+        rnorm: float,
     ) -> Optional["CgSolver.Info"]:
         if stopper is not None:
             info = self.Info(self.Stop.USER, iter_count, bnorm, rnorm)

@@ -267,9 +267,9 @@ class FaultCellGrid:
                             dmin = d
         return cmin
 
-    def _find_cell_left_right(
-        self, left: bool, cell: FaultCell
-    ) -> Optional[FaultCell]:
+
+    def _find_cell_left_right(self, left: bool, cell: FaultCell) -> Optional[FaultCell]:
+
         i1, i2, i3 = cell.i1, cell.i2, cell.i3
         x1, x2, x3 = cell.x1, cell.x2, cell.x3
         v1, v2, v3 = cell.v1, cell.v2, cell.v3

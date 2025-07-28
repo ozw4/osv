@@ -73,4 +73,3 @@ class FaultCell2:
         u2 = cp
         return [u1, u2]
 
-
