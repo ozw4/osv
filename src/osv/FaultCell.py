@@ -12,8 +12,10 @@ from .FaultGeometry import (
 )
 
 
+
 from math import atan2, cos, radians, sin, asin, sqrt
 from typing import Callable, Iterable, List, Optional, Sequence
+
 
 class ColorMap:
     """Simple grayscale color map."""
