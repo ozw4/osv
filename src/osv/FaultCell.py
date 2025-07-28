@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+
 from math import cos, radians, sin, sqrt
 from typing import Callable, Iterable, List, Optional, Sequence
+
 
 from .FaultGeometry import (
     fault_dip_vector_from_strike_and_dip,
@@ -27,7 +29,6 @@ class ColorMap:
 # -----------------------------------------------------------------------------
 # Helper classes
 # -----------------------------------------------------------------------------
-
 
 class FloatList:
     def __init__(self) -> None:
@@ -305,9 +306,11 @@ class FaultCell:
         cra = self.cr.ca if self.cr else None
         return self.nearest_cell(self.ca, cla, cra, p1, p2, p3)
 
+
     def get_cell_below_nearest_to(
         self, p1: float, p2: float, p3: float
     ) -> Optional["FaultCell"]:
+
         clb = self.cl.cb if self.cl else None
         crb = self.cr.cb if self.cr else None
         return self.nearest_cell(self.cb, clb, crb, p1, p2, p3)
@@ -351,24 +354,6 @@ class FaultCell:
     # ------------------------------------------------------------------
     # Static utilities
     # ------------------------------------------------------------------
-    @staticmethod
-    def nearest_cell(
-        c1: Optional["FaultCell"],
-        c2: Optional["FaultCell"],
-        c3: Optional["FaultCell"],
-        p1: float,
-        p2: float,
-        p3: float,
-    ) -> Optional["FaultCell"]:
-        ds1 = FaultCell.distance_squared(c1, p1, p2, p3)
-        ds2 = FaultCell.distance_squared(c2, p1, p2, p3)
-        ds3 = FaultCell.distance_squared(c3, p1, p2, p3)
-        dsm = min(ds1, ds2, ds3)
-        if dsm == ds1:
-            return c1
-        if dsm == ds2:
-            return c2
-        return c3
 
     @staticmethod
     def distance_squared(
@@ -431,6 +416,7 @@ class FaultCell:
         return [xyz.trim(), uvw.trim(), rgb]
 
     @staticmethod
+
     def get_xyz_uvw_rgb_for_throw(
         size: float, cmap: ColorMap, cells: Sequence["FaultCell"], lhc: bool
     ) -> List[List[float]]:
@@ -445,6 +431,7 @@ class FaultCell:
     # ------------------------------------------------------------------
     # Internal setup
     # ------------------------------------------------------------------
+
     def set_(
         self, x1: float, x2: float, x3: float, fl: float, fp: float, ft: float
     ) -> None:
