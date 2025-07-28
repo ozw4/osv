@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+
 from math import cos, radians, sin, sqrt
 from typing import Callable, Iterable, List, Optional, Sequence
 
@@ -12,6 +13,7 @@ from .FaultGeometry import (
     fault_strike_from_normal_vector,
     fault_dip_from_normal_vector,
 )
+
 
 
 class ColorMap:
