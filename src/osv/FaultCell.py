@@ -14,10 +14,8 @@ from .FaultGeometry import (
     fault_dip_from_normal_vector,
 )
 
-=======
 from math import atan2, cos, radians, sin, asin, sqrt
 from typing import Callable, Iterable, List, Optional, Sequence
-
 
 class ColorMap:
     """Simple grayscale color map."""
@@ -30,6 +28,7 @@ class ColorMap:
 
 
 # -----------------------------------------------------------------------------
+
 # Fault geometry utilities
 # -----------------------------------------------------------------------------
 
@@ -69,6 +68,7 @@ def fault_dip_from_normal_vector(w1: float, w2: float, w3: float) -> float:
 
 
 # -----------------------------------------------------------------------------
+
 # Helper classes
 # -----------------------------------------------------------------------------
 
