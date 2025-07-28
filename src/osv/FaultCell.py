@@ -2,6 +2,19 @@
 
 from __future__ import annotations
 
+
+from math import cos, radians, sin, sqrt
+from typing import Callable, Iterable, List, Optional, Sequence
+
+from .FaultGeometry import (
+    fault_dip_vector_from_strike_and_dip,
+    fault_strike_vector_from_strike_and_dip,
+    fault_normal_vector_from_strike_and_dip,
+    fault_strike_from_normal_vector,
+    fault_dip_from_normal_vector,
+)
+
+=======
 from math import atan2, cos, radians, sin, asin, sqrt
 from typing import Callable, Iterable, List, Optional, Sequence
 
