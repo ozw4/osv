@@ -53,9 +53,11 @@ class FaultSkin:
         return cells
 
     @staticmethod
+
     def get_fl(
         n1: int, n2: int, n3: int, skins: Sequence["FaultSkin"]
     ) -> List[List[List[float]]]:
+
         fl = [[[0.0 for _ in range(n1)] for _ in range(n2)] for _ in range(n3)]
         for skin in skins:
             for cell in skin:
@@ -150,9 +152,11 @@ class FaultSkin:
     def get_cell_xyz_uvw_rgb_for_likelihood(
         self, size: float, cmap: ColorMap, lhc: bool
     ) -> List[List[float]]:
+
         return FaultCell.get_xyz_uvw_rgb_for_likelihood(
             size, cmap, self.get_cells(), lhc
         )
+
 
     def get_cell_xyz_uvw_rgb_for_throw(
         self, size: float, cmap: ColorMap, lhc: bool
@@ -297,7 +301,9 @@ class FaultSkin:
             ncell = struct.unpack(">i", f.read(4))[0]
             cell_list: List[FaultCell] = []
             for _ in range(ncell):
+
                 x1, x2, x3, fl, fp, ft = struct.unpack(">ffffff", f.read(24))
+
                 cell = FaultCell(x1, x2, x3, fl, fp, ft)
                 cell.skin = skin
                 cell_list.append(cell)

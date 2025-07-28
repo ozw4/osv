@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from math import cos, radians, sin, sqrt
-from typing import Callable, Iterable, List, Optional, Sequence
 
 from .FaultGeometry import (
     fault_dip_vector_from_strike_and_dip,
@@ -13,6 +11,9 @@ from .FaultGeometry import (
     fault_dip_from_normal_vector,
 )
 
+
+from math import atan2, cos, radians, sin, asin, sqrt
+from typing import Callable, Iterable, List, Optional, Sequence
 
 class ColorMap:
     """Simple grayscale color map."""
@@ -27,7 +28,6 @@ class ColorMap:
 # -----------------------------------------------------------------------------
 # Helper classes
 # -----------------------------------------------------------------------------
-
 
 class FloatList:
     def __init__(self) -> None:
@@ -59,6 +59,7 @@ class FaultCell:
     def __init__(
         self, x1: float, x2: float, x3: float, fl: float, fp: float, ft: float
     ) -> None:
+
         self.ca: Optional[FaultCell] = None
         self.cb: Optional[FaultCell] = None
         self.cl: Optional[FaultCell] = None
@@ -292,6 +293,7 @@ class FaultCell:
         return d1 * d1 + d2 * d2 + d3 * d3
 
     def distance_from_plane_to(self, p1: float, p2: float, p3: float) -> float:
+
         return (
             self.w1 * (p1 - self.x1)
             + self.w2 * (p2 - self.x2)
@@ -301,13 +303,16 @@ class FaultCell:
     def get_cell_above_nearest_to(
         self, p1: float, p2: float, p3: float
     ) -> Optional["FaultCell"]:
+
         cla = self.cl.ca if self.cl else None
         cra = self.cr.ca if self.cr else None
         return self.nearest_cell(self.ca, cla, cra, p1, p2, p3)
 
+
     def get_cell_below_nearest_to(
         self, p1: float, p2: float, p3: float
     ) -> Optional["FaultCell"]:
+
         clb = self.cl.cb if self.cl else None
         crb = self.cr.cb if self.cr else None
         return self.nearest_cell(self.cb, clb, crb, p1, p2, p3)
@@ -352,6 +357,7 @@ class FaultCell:
     # Static utilities
     # ------------------------------------------------------------------
     @staticmethod
+
     def nearest_cell(
         c1: Optional["FaultCell"],
         c2: Optional["FaultCell"],
@@ -360,6 +366,7 @@ class FaultCell:
         p2: float,
         p3: float,
     ) -> Optional["FaultCell"]:
+
         ds1 = FaultCell.distance_squared(c1, p1, p2, p3)
         ds2 = FaultCell.distance_squared(c2, p1, p2, p3)
         ds3 = FaultCell.distance_squared(c3, p1, p2, p3)
@@ -371,6 +378,7 @@ class FaultCell:
         return c3
 
     @staticmethod
+
     def distance_squared(
         c: Optional["FaultCell"], p1: float, p2: float, p3: float
     ) -> float:
@@ -380,6 +388,7 @@ class FaultCell:
     def rotate_point(
         cp: float, sp: float, ct: float, st: float, x: Sequence[float]
     ) -> List[float]:
+
         x1, x2, x3 = x
         y1 = ct * x1 + st * x2
         y2 = -cp * st * x1 + cp * ct * x2 + sp * x3
@@ -387,6 +396,7 @@ class FaultCell:
         return [y1, y2, y3]
 
     @staticmethod
+
     def get_xyz_uvw_rgb(
         size: float,
         cmap: ColorMap,
@@ -394,6 +404,7 @@ class FaultCell:
         get1: Callable[["FaultCell"], float],
         lhc: bool,
     ) -> List[List[float]]:
+
         xyz = FloatList()
         uvw = FloatList()
         fcl = FloatList()
@@ -431,6 +442,7 @@ class FaultCell:
         return [xyz.trim(), uvw.trim(), rgb]
 
     @staticmethod
+
     def get_xyz_uvw_rgb_for_throw(
         size: float, cmap: ColorMap, cells: Sequence["FaultCell"], lhc: bool
     ) -> List[List[float]]:
@@ -440,14 +452,17 @@ class FaultCell:
     def get_xyz_uvw_rgb_for_likelihood(
         size: float, cmap: ColorMap, cells: Sequence["FaultCell"], lhc: bool
     ) -> List[List[float]]:
+
         return FaultCell.get_xyz_uvw_rgb(size, cmap, cells, lambda c: c.fl, lhc)
 
     # ------------------------------------------------------------------
     # Internal setup
     # ------------------------------------------------------------------
+
     def set_(
         self, x1: float, x2: float, x3: float, fl: float, fp: float, ft: float
     ) -> None:
+
         self.x1 = x1
         self.x2 = x2
         self.x3 = x3
