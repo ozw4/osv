@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+
 from math import cos, radians, sin, sqrt
 from typing import Callable, Iterable, List, Optional, Sequence
 
@@ -13,6 +14,10 @@ from .FaultGeometry import (
     fault_dip_from_normal_vector,
 )
 
+=======
+from math import atan2, cos, radians, sin, asin, sqrt
+from typing import Callable, Iterable, List, Optional, Sequence
+
 
 class ColorMap:
     """Simple grayscale color map."""
@@ -22,6 +27,45 @@ class ColorMap:
         for v in values:
             rgb.extend([v, v, v])
         return rgb
+
+
+# -----------------------------------------------------------------------------
+# Fault geometry utilities
+# -----------------------------------------------------------------------------
+
+def fault_dip_vector_from_strike_and_dip(phi: float, theta: float) -> List[float]:
+    p = radians(phi)
+    t = radians(theta)
+    cp = cos(p)
+    sp = sin(p)
+    ct = cos(t)
+    st = sin(t)
+    return [st, ct * cp, -ct * sp]
+
+
+def fault_strike_vector_from_strike_and_dip(phi: float, theta: float) -> List[float]:
+    p = radians(phi)
+    cp = cos(p)
+    sp = sin(p)
+    return [0.0, sp, cp]
+
+
+def fault_normal_vector_from_strike_and_dip(phi: float, theta: float) -> List[float]:
+    p = radians(phi)
+    t = radians(theta)
+    cp = cos(p)
+    sp = sin(p)
+    ct = cos(t)
+    st = sin(t)
+    return [-ct, st * cp, -st * sp]
+
+
+def fault_strike_from_normal_vector(w1: float, w2: float, w3: float) -> float:
+    return (atan2(-w3, w2) * 180.0 / 3.141592653589793) % 360.0
+
+
+def fault_dip_from_normal_vector(w1: float, w2: float, w3: float) -> float:
+    return asin(-w1) * 180.0 / 3.141592653589793
 
 
 # -----------------------------------------------------------------------------
