@@ -28,7 +28,6 @@ class ColorMap:
 # Helper classes
 # -----------------------------------------------------------------------------
 
-
 class FloatList:
     def __init__(self) -> None:
         self._data: List[float] = []
@@ -308,6 +307,7 @@ class FaultCell:
     def get_cell_below_nearest_to(
         self, p1: float, p2: float, p3: float
     ) -> Optional["FaultCell"]:
+
         clb = self.cl.cb if self.cl else None
         crb = self.cr.cb if self.cr else None
         return self.nearest_cell(self.cb, clb, crb, p1, p2, p3)
@@ -351,6 +351,7 @@ class FaultCell:
     # ------------------------------------------------------------------
     # Static utilities
     # ------------------------------------------------------------------
+
     @staticmethod
     def nearest_cell(
         c1: Optional["FaultCell"],
@@ -431,6 +432,7 @@ class FaultCell:
         return [xyz.trim(), uvw.trim(), rgb]
 
     @staticmethod
+
     def get_xyz_uvw_rgb_for_throw(
         size: float, cmap: ColorMap, cells: Sequence["FaultCell"], lhc: bool
     ) -> List[List[float]]:
@@ -445,6 +447,7 @@ class FaultCell:
     # ------------------------------------------------------------------
     # Internal setup
     # ------------------------------------------------------------------
+
     def set_(
         self, x1: float, x2: float, x3: float, fl: float, fp: float, ft: float
     ) -> None:
